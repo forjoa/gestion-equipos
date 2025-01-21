@@ -1,13 +1,20 @@
 package org.example.models;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Database {
-    private static final String CONNECTION_URL = "jdbc:postgresql://ep-delicate-surf-a8nr8vuo.eastus2.azure.neon.tech/neondb?user=neondb_owner&password=npg_pOAVsTgd96iQ&sslmode=require";
+    static Properties properties = new Properties();
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(CONNECTION_URL);
+    public static String getDatabaseUrl() throws IOException {
+        properties.load(Database.class.getClassLoader().getResourceAsStream("application.properties"));
+        return properties.getProperty("db.url");
+    }
+
+    public static Connection getConnection() throws SQLException, IOException {
+        return DriverManager.getConnection(getDatabaseUrl());
     }
 }
