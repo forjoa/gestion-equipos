@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class App {
-    public App () {
+    public App() {
         JFrame frame = new JFrame("Gestión de Equipos y Jugadores");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
@@ -34,7 +34,13 @@ public class App {
                 throw new RuntimeException(ex);
             }
         });
-        // listTeamsItem.addActionListener(e -> new ListTeamsWindow());
+        listTeamsItem.addActionListener(e -> {
+            try {
+                new ListTeamsWindow();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         // updateTeamItem.addActionListener(e -> new UpdateTeamWindow());
         // deleteTeamItem.addActionListener(e -> new DeleteTeamWindow());
 
