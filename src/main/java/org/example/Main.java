@@ -21,7 +21,7 @@ public class Main {
                 System.out.println("team id: " + rs.getInt(4));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
