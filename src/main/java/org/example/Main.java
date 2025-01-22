@@ -1,18 +1,15 @@
 package org.example;
 
-import org.example.lib.ModernTheme;
+import org.example.components.CreateTeamWindow;
 import org.example.models.Database;
 
 import javax.swing.*;
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) {
-        ModernTheme.apply();
-
         String sql = "SELECT * FROM jugadores";
 
         try (Connection connection = Database.getConnection();
@@ -29,25 +26,33 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Gestión de Equipos y Jugadores");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
 
-        JLabel label = new JLabel("testing");
-        JButton button = new JButton("button test");
-        JPanel panel = new JPanel(new GridBagLayout());
+        JMenuBar menuBar = new JMenuBar();
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(5, 5, 5, 5);
+        JMenu teamMenu = new JMenu("Equipos");
+        JMenuItem createTeamItem = new JMenuItem("Crear Equipo");
+        JMenuItem listTeamsItem = new JMenuItem("Lista de Equipos");
+        JMenuItem updateTeamItem = new JMenuItem("Actualizar Equipo");
+        JMenuItem deleteTeamItem = new JMenuItem("Eliminar Equipo");
 
-        panel.add(label, gbc);
-        panel.add(button, gbc);
+        teamMenu.add(createTeamItem);
+        teamMenu.add(listTeamsItem);
+        teamMenu.add(updateTeamItem);
+        teamMenu.add(deleteTeamItem);
 
-        frame.add(panel);
+        menuBar.add(teamMenu);
+
+        // actions for each window
+        createTeamItem.addActionListener(e -> new CreateTeamWindow());
+        // listTeamsItem.addActionListener(e -> new ListTeamsWindow());
+        // updateTeamItem.addActionListener(e -> new UpdateTeamWindow());
+        // deleteTeamItem.addActionListener(e -> new DeleteTeamWindow());
+
+        frame.setJMenuBar(menuBar);
         frame.setVisible(true);
-
-        SwingUtilities.updateComponentTreeUI(frame);
     }
 }
