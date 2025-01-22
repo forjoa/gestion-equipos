@@ -7,4 +7,11 @@ public class Constants {
     public static final String TEAM_BY_ID = "SELECT * FROM equipos WHERE id = ?";
     public static final String UPDATE_TEAM = "UPDATE equipos SET nombre = ?, ciudad = ?, estadio = ? WHERE id = ?";
     public static final String DELETE_TEAM = "DELETE FROM equipos WHERE id = ?";
+
+    // players queries
+    public static final String INSERT_PLAYER = "INSERT INTO jugadores (nombre, posicion, equipo_id) VALUES (?, ?, ?)";
+    public static final String GET_PLAYERS = "SELECT * FROM jugadores";
+    public static final String PLAYER_BY_ID = "SELECT * FROM jugadores WHERE id = ?";
+    public static final String UPDATE_PLAYER = "UPDATE jugadores SET nombre = ?, posicion = ?, equipo_id = ? WHERE id = ?";
+    public static final String DELETE_PLAYER = "DELETE FROM jugadores WHERE id = ?";
 }
