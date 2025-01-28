@@ -1,6 +1,6 @@
 package org.example.components;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class App {
     public App() {
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.setLookAndFeel(new FlatDarkLaf());
             UIManager.put("Button.arc", 15);
         } catch (Exception e) {
             e.printStackTrace();
