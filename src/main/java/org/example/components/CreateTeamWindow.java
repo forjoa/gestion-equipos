@@ -42,6 +42,7 @@ public class CreateTeamWindow {
         formPanel.add(nameLabel, gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
+        gbc.ipady = 5;
         formPanel.add(nameField, gbc);
 
         // city name
@@ -53,6 +54,7 @@ public class CreateTeamWindow {
         formPanel.add(cityLabel, gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
+        gbc.ipady = 5;
         formPanel.add(cityField, gbc);
 
         // stadium name
@@ -64,6 +66,7 @@ public class CreateTeamWindow {
         formPanel.add(stadiumLabel, gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
+        gbc.ipady = 5;
         formPanel.add(stadiumField, gbc);
 
         // send button
@@ -72,6 +75,7 @@ public class CreateTeamWindow {
         gbc.gridy = 3;
         gbc.gridwidth = 2; // 2 columns
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.ipady = 10;
         formPanel.add(createButton, gbc);
 
         // styling components
