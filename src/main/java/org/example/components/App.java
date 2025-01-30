@@ -50,7 +50,13 @@ public class App {
                 throw new RuntimeException(ex);
             }
         });
-        // updateTeamItem.addActionListener(e -> new UpdateTeamWindow());
+        updateTeamItem.addActionListener(e -> {
+            try {
+                new SelectTeamEditWindow();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         // deleteTeamItem.addActionListener(e -> new DeleteTeamWindow());
 
         frame.setJMenuBar(menuBar);
