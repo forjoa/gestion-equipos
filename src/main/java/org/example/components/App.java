@@ -110,7 +110,13 @@ public class App {
                 throw new RuntimeException(ex);
             }
         });
-        // detailPlayerItem.addActionListener(e -> new SelectPlayerDetailsWindow);
+        detailPlayerItem.addActionListener(e -> {
+            try {
+                new SelectPlayerDetailsWindow();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
