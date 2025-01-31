@@ -37,7 +37,19 @@ public class App {
         teamMenu.add(deleteTeamItem);
         teamMenu.add(detailTeamItem);
 
+        JMenu playerMenu = new JMenu("Jugadores");
+        JMenuItem createPlayerItem = new JMenuItem("Crear Jugador");
+        JMenuItem updatePlayerItem = new JMenuItem("Actualizar Jugador");
+        JMenuItem deletePlayerItem = new JMenuItem("Eliminar Jugador");
+        JMenuItem detailPlayerItem = new JMenuItem("Detalles del Jugador");
+
+        playerMenu.add(createPlayerItem);
+        playerMenu.add(updatePlayerItem);
+        playerMenu.add(deletePlayerItem);
+        playerMenu.add(detailPlayerItem);
+
         menuBar.add(teamMenu);
+        menuBar.add(playerMenu);
 
         // actions for each window
         createTeamItem.addActionListener(e -> {
@@ -75,6 +87,18 @@ public class App {
                 throw new RuntimeException(ex);
             }
         });
+
+        // actions for each player window
+        createPlayerItem.addActionListener(e -> {
+            try {
+                new CreatePlayerWindow();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        // updatePlayerItem.addActionListener(e -> new SelectPlayerEditWindow());
+        // deletePlayerItem.addActionListener(e -> new DeletePlayerWindow());
+        // detailPlayerItem.addActionListener(e -> new SelectPlayerDetailsWindow);
 
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
