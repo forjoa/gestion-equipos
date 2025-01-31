@@ -135,4 +135,38 @@ public class TeamDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public List<TeamPlayers> getAllTeamPlayers() {
+        List<TeamPlayers> teamsList = new ArrayList<>();
+
+        try (Statement stmt = database.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT e.*, json_agg(j.*) FROM equipos e JOIN jugadores j ON j.equipo_id = e.id GROUP BY e.id");
+
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            while (rs.next()) {
+                // Crear un nuevo equipo en cada iteración
+                Team team = new Team(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("ciudad"),
+                        rs.getString("estadio")
+                );
+
+                // Obtener la columna JSON agregada como String
+                String jsonPlayers = rs.getString("json_agg");
+
+                // Deserializar el JSON en una lista de Player
+                List<Player> playersList = objectMapper.readValue(jsonPlayers, new TypeReference<List<Player>>() {});
+
+                // Agregar el equipo con sus jugadores a la lista
+                teamsList.add(new TeamPlayers(team, playersList));
+            }
+
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return teamsList;
+    }
 }

@@ -1,12 +1,17 @@
 package org.example.components;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import org.example.lib.PDFGenerator;
+import org.example.lib.TeamDAO;
+import org.example.models.TeamPlayers;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class App {
     public App() {
@@ -21,6 +26,7 @@ public class App {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
+        frame.setLayout(new BorderLayout());
 
         JMenuBar menuBar = new JMenuBar();
 
@@ -117,6 +123,25 @@ public class App {
                 throw new RuntimeException(ex);
             }
         });
+
+        JButton generatePdfItem = new JButton("Generar PDF de Equipos");
+        generatePdfItem.setBackground(Color.decode("#016BFF"));
+        generatePdfItem.setForeground(Color.WHITE);
+        generatePdfItem.setFont(new Font("Arial", Font.BOLD, 14));
+        generatePdfItem.setFocusPainted(false);
+        generatePdfItem.addActionListener(e -> {
+            try {
+                TeamDAO teamDAO = new TeamDAO();
+                List<TeamPlayers> teams = teamDAO.getAllTeamPlayers();
+                PDFGenerator.generateTeamsReport(teams);
+                JOptionPane.showMessageDialog(frame, "PDF generado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(frame, "Error al generar el PDF.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        frame.add(generatePdfItem, BorderLayout.NORTH);
 
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
