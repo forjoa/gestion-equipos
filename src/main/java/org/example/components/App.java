@@ -57,7 +57,13 @@ public class App {
                 throw new RuntimeException(ex);
             }
         });
-        // deleteTeamItem.addActionListener(e -> new DeleteTeamWindow());
+        deleteTeamItem.addActionListener(e -> {
+            try {
+                new DeleteTeamWindow();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
