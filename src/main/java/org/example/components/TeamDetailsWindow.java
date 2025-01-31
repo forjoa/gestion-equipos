@@ -76,7 +76,7 @@ public class TeamDetailsWindow {
     private static JScrollPane getJScrollPane(List<Player> playersList) {
         DefaultListModel<String> playersListModel = new DefaultListModel<>();
         for (Player player : playersList) {
-            playersListModel.addElement(player.getName() + " - " + player.getPosition());
+            playersListModel.addElement("      " + player.getName() + " - " + player.getPosition());
         }
 
         JList<String> playersListComponent = new JList<>(playersListModel);
