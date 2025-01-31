@@ -117,10 +117,10 @@ public class TeamDAO {
                     );
                 }
 
-                // Obtener la columna JSON agregada como String
+                // get JSON column added like string
                 String jsonPlayers = rs.getString("json_agg");
 
-                // Deserializar el JSON en una lista de Player
+                // get JSON in a Player list
                 playersList = objectMapper.readValue(jsonPlayers, new TypeReference<>() {
                 });
             }
@@ -145,7 +145,7 @@ public class TeamDAO {
             ObjectMapper objectMapper = new ObjectMapper();
 
             while (rs.next()) {
-                // Crear un nuevo equipo en cada iteración
+                // create new team on each iteration
                 Team team = new Team(
                         rs.getInt("id"),
                         rs.getString("nombre"),
@@ -153,13 +153,13 @@ public class TeamDAO {
                         rs.getString("estadio")
                 );
 
-                // Obtener la columna JSON agregada como String
+                // get JSON column added like string
                 String jsonPlayers = rs.getString("json_agg");
 
-                // Deserializar el JSON en una lista de Player
+                // get JSON as a Player list
                 List<Player> playersList = objectMapper.readValue(jsonPlayers, new TypeReference<List<Player>>() {});
 
-                // Agregar el equipo con sus jugadores a la lista
+                // add team w/ players
                 teamsList.add(new TeamPlayers(team, playersList));
             }
 

@@ -8,16 +8,15 @@ import org.example.models.Player;
 import org.example.models.Team;
 import org.example.models.TeamPlayers;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
 public class PDFGenerator {
     public static void generateTeamsReport(List<TeamPlayers> teams) {
-        String dest = "teams_report.pdf";
+        String destination = "teams_report.pdf";
 
         try {
-            PdfWriter writer = new PdfWriter(dest);
+            PdfWriter writer = new PdfWriter(destination);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
@@ -25,19 +24,19 @@ public class PDFGenerator {
                 Team team = teamPlayers.getTeam();
                 List<Player> players = teamPlayers.getPlayersList();
 
-                // Agregar título del equipo
+                // add team's title
                 Paragraph teamTitle = new Paragraph(team.getName())
                         .setBold()
                         .setFontSize(18)
                         .setTextAlignment(TextAlignment.CENTER);
                 document.add(teamTitle);
 
-                // Agregar información general del equipo
+                // add team information
                 document.add(new Paragraph("Ciudad: " + team.getCity()));
                 document.add(new Paragraph("Estadio: " + team.getStadium()));
                 document.add(new Paragraph(" "));
 
-                // Lista numerada de jugadores
+                // ordered team members
                 com.itextpdf.layout.element.List list = new com.itextpdf.layout.element.List().setSymbolIndent(12).setListSymbol("•");
                 int count = 1;
                 for (Player player : players) {
@@ -46,14 +45,13 @@ public class PDFGenerator {
                 }
                 document.add(list);
 
-                // Salto de línea entre equipos
+                // line between teams
                 document.add(new Paragraph(" ").setFontSize(12));
-                document.add(new Paragraph("---------------------------------------").setTextAlignment(TextAlignment.CENTER));
+                document.add(new Paragraph("----------------------------------------------").setTextAlignment(TextAlignment.CENTER));
                 document.add(new Paragraph(" "));
             }
 
             document.close();
-            System.out.println("PDF generado en: " + new File(dest).getAbsolutePath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

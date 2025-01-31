@@ -2,7 +2,6 @@ package org.example.components;
 
 import org.example.lib.PlayerDAO;
 import org.example.models.Player;
-import org.example.models.Team;
 
 import javax.swing.*;
 import java.awt.*;
