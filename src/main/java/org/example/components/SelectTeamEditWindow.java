@@ -5,6 +5,8 @@ import org.example.models.Team;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -35,9 +37,9 @@ public class SelectTeamEditWindow {
 
         // team name
         JLabel nameLabel = new JLabel("Selecciona el equipo");
-        JComboBox<String> names = new JComboBox<>();
+        JComboBox<Team> names = new JComboBox<>();
         for(Team team: teamDAO.getAllTeams()) {
-            names.addItem(team.getName());
+            names.addItem(team);
         }
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -56,6 +58,16 @@ public class SelectTeamEditWindow {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.ipady = 10;
         selectPanel.add(createButton, gbc);
+
+        createButton.addActionListener(e -> {
+            Team selectedTeam = (Team) names.getSelectedItem();
+            try {
+                assert selectedTeam != null;
+                new EditTeamWindow(selectedTeam.getId());
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         // styling components
         nameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
