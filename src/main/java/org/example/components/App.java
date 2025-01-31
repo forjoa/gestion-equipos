@@ -96,7 +96,13 @@ public class App {
                 throw new RuntimeException(ex);
             }
         });
-        // updatePlayerItem.addActionListener(e -> new SelectPlayerEditWindow());
+        updatePlayerItem.addActionListener(e -> {
+            try {
+                new SelectPlayerEditWindow();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         deletePlayerItem.addActionListener(e -> {
             try {
                 new DeletePlayerWindow();
