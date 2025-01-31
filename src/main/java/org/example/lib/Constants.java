@@ -7,6 +7,7 @@ public class Constants {
     public static final String TEAM_BY_ID = "SELECT * FROM equipos WHERE id = ?";
     public static final String UPDATE_TEAM = "UPDATE equipos SET nombre = ?, ciudad = ?, estadio = ? WHERE id = ?";
     public static final String DELETE_TEAM = "DELETE FROM equipos WHERE id = ?";
+    public static final String TEAM_PLAYERS_BY_ID = "SELECT e.*, json_agg(j.*) FROM equipos e JOIN jugadores j ON j.equipo_id = e.id WHERE e.id = ? GROUP BY e.id";
 
     // players queries
     public static final String INSERT_PLAYER = "INSERT INTO jugadores (nombre, posicion, equipo_id) VALUES (?, ?, ?)";

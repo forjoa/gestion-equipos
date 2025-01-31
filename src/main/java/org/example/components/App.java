@@ -3,6 +3,8 @@ package org.example.components;
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -27,11 +29,13 @@ public class App {
         JMenuItem listTeamsItem = new JMenuItem("Lista de Equipos");
         JMenuItem updateTeamItem = new JMenuItem("Actualizar Equipo");
         JMenuItem deleteTeamItem = new JMenuItem("Eliminar Equipo");
+        JMenuItem detailTeamItem = new JMenuItem("Detalles de Equipo");
 
         teamMenu.add(createTeamItem);
         teamMenu.add(listTeamsItem);
         teamMenu.add(updateTeamItem);
         teamMenu.add(deleteTeamItem);
+        teamMenu.add(detailTeamItem);
 
         menuBar.add(teamMenu);
 
@@ -60,6 +64,13 @@ public class App {
         deleteTeamItem.addActionListener(e -> {
             try {
                 new DeleteTeamWindow();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        detailTeamItem.addActionListener(e -> {
+            try {
+                new SelectTeamDetailsWindow();
             } catch (SQLException | IOException ex) {
                 throw new RuntimeException(ex);
             }

@@ -1,7 +1,11 @@
 package org.example.lib;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.models.Database;
+import org.example.models.Player;
 import org.example.models.Team;
+import org.example.models.TeamPlayers;
 
 import java.io.IOException;
 import java.sql.*;
@@ -89,6 +93,45 @@ public class TeamDAO {
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // get team info and players
+    public TeamPlayers getAllTeamPlayersById(Integer id) {
+        try (PreparedStatement stmt = database.prepareStatement(Constants.TEAM_PLAYERS_BY_ID)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            Team team = null;
+            List<Player> playersList = new ArrayList<>();
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            while (rs.next()) {
+                if (team == null) {
+                    team = new Team(
+                            rs.getInt("id"),
+                            rs.getString("nombre"),
+                            rs.getString("ciudad"),
+                            rs.getString("estadio")
+                    );
+                }
+
+                // Obtener la columna JSON agregada como String
+                String jsonPlayers = rs.getString("json_agg");
+
+                // Deserializar el JSON en una lista de Player
+                playersList = objectMapper.readValue(jsonPlayers, new TypeReference<>() {
+                });
+            }
+
+            if (team != null) {
+                return new TeamPlayers(team, playersList);
+            } else {
+                return null;
+            }
+
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
