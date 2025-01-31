@@ -97,7 +97,13 @@ public class App {
             }
         });
         // updatePlayerItem.addActionListener(e -> new SelectPlayerEditWindow());
-        // deletePlayerItem.addActionListener(e -> new DeletePlayerWindow());
+        deletePlayerItem.addActionListener(e -> {
+            try {
+                new DeletePlayerWindow();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         // detailPlayerItem.addActionListener(e -> new SelectPlayerDetailsWindow);
 
         frame.setJMenuBar(menuBar);

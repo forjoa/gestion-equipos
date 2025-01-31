@@ -21,4 +21,9 @@ public class Player {
 
     @JsonProperty("equipo_id")
     private Integer team_id;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
