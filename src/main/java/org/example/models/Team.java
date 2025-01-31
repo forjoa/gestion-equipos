@@ -14,4 +14,9 @@ public class Team {
     private String name;
     private String city;
     private String stadium;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
