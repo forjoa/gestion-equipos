@@ -1,8 +1,10 @@
 package org.example.components;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import org.example.lib.ExcelGenerator;
 import org.example.lib.PDFGenerator;
 import org.example.lib.TeamDAO;
+import org.example.models.Team;
 import org.example.models.TeamPlayers;
 
 import javax.swing.*;
@@ -17,14 +19,15 @@ public class App {
             UIManager.setLookAndFeel(new FlatDarkLaf());
             UIManager.put("Button.arc", 15);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         JFrame frame = new JFrame("Gestión de Equipos y Jugadores");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
-        frame.setLayout(new BorderLayout());
+        FlowLayout frameLayout = new FlowLayout(FlowLayout.CENTER, 20, 20);
+        frame.setLayout(frameLayout);
 
         JMenuBar menuBar = new JMenuBar();
 
@@ -134,12 +137,30 @@ public class App {
                 PDFGenerator.generateTeamsReport(teams);
                 JOptionPane.showMessageDialog(frame, "PDF generado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
-                ex.printStackTrace();
                 JOptionPane.showMessageDialog(frame, "Error al generar el PDF.", "Error", JOptionPane.ERROR_MESSAGE);
+                throw new RuntimeException(ex);
             }
         });
 
-        frame.add(generatePdfItem, BorderLayout.NORTH);
+        JButton generateExcelItem = new JButton("Generar Excel de Equipos");
+        generateExcelItem.setBackground(Color.decode("#016BFF"));
+        generateExcelItem.setForeground(Color.WHITE);
+        generateExcelItem.setFont(new Font("Arial", Font.BOLD, 14));
+        generateExcelItem.setFocusPainted(false);
+        generateExcelItem.addActionListener(e -> {
+            try {
+                TeamDAO teamDAO = new TeamDAO();
+                List<Team> teams = teamDAO.getAllTeams();
+                ExcelGenerator.generateTeamsExcel(teams, teamDAO);
+                JOptionPane.showMessageDialog(frame, "Excel generado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, "Error al generar el Excel.", "Error", JOptionPane.ERROR_MESSAGE);
+                throw new RuntimeException(ex);
+            }
+        });
+
+        frame.add(generatePdfItem);
+        frame.add(generateExcelItem);
 
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
