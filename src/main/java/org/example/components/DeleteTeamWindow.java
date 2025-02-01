@@ -62,6 +62,7 @@ public class DeleteTeamWindow {
             assert selectedTeam != null;
             boolean response = teamDAO.deleteTeam(selectedTeam.getId());
             JOptionPane.showMessageDialog(frame, response ? "Equipo eliminado de manera correcta" : "Ocurrió un error");
+            frame.dispose();
         });
 
         // styling components

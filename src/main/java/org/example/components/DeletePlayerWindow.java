@@ -62,6 +62,7 @@ public class DeletePlayerWindow {
             assert selectedTeam != null;
             boolean response = playerDAO.deletePlayer(selectedTeam.getId());
             JOptionPane.showMessageDialog(frame, response ? "Jugador eliminado de manera correcta" : "Ocurrió un error");
+            frame.dispose();
         });
 
         // styling components

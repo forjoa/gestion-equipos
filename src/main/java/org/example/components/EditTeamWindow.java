@@ -101,6 +101,8 @@ public class EditTeamWindow {
             boolean response = teamDAO.updateTeam(new Team(teamID, teamName, cityName, stadiumName));
 
             JOptionPane.showMessageDialog(frame, response ? "Equipo editado de manera correcta" : "Ocurrió un error");
+
+            frame.dispose();
         });
 
         // add panel to frame

@@ -96,6 +96,8 @@ public class CreateTeamWindow {
             boolean response = teamDAO.addTeam(new Team(0, teamName, cityName, stadiumName));
 
             JOptionPane.showMessageDialog(frame, response ? "Equipo agregado de manera correcta" : "Ocurrió un error");
+
+            frame.dispose();
         });
 
         // add panel to frame

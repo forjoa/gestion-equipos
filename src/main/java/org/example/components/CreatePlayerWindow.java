@@ -102,6 +102,7 @@ public class CreatePlayerWindow {
             boolean response = playerDAO.addPlayer(new Player(0, playerName, positionName, team.getId()));
 
             JOptionPane.showMessageDialog(frame, response ? "Equipo agregado de manera correcta" : "Ocurrió un error");
+            frame.dispose();
         });
 
         // add panel to frame
