@@ -62,6 +62,7 @@ public class SelectTeamEditWindow {
             try {
                 assert selectedTeam != null;
                 new EditTeamWindow(selectedTeam.getId());
+                frame.dispose();
             } catch (SQLException | IOException ex) {
                 throw new RuntimeException(ex);
             }

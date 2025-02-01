@@ -62,6 +62,7 @@ public class SelectPlayerDetailsWindow {
             try {
                 assert selectedTeam != null;
                 new PlayerDetailsWindow(selectedTeam.getId());
+                frame.dispose();
             } catch (SQLException | IOException ex) {
                 throw new RuntimeException(ex);
             }
