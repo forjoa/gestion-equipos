@@ -1,4 +1,4 @@
-package org.example.components;
+package org.example.components.team;
 
 import org.example.lib.TeamDAO;
 import org.example.models.Team;
@@ -8,22 +8,17 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class EditTeamWindow {
+public class CreateTeamWindow {
     private TeamDAO teamDAO = new TeamDAO();
-    private Integer teamID;
 
-    public EditTeamWindow(Integer teamID) throws SQLException, IOException {
-        this.teamID = teamID;
-
-        Team currentTeam = teamDAO.getTeamById(teamID);
-
-        JFrame frame = new JFrame("Editar Equipo: " + currentTeam.getName());
+    public CreateTeamWindow() throws SQLException, IOException {
+        JFrame frame = new JFrame("Crear Equipo");
         frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
 
         // form title
-        JLabel titleLabel = new JLabel("Equipo a editar: " + currentTeam.getName());
+        JLabel titleLabel = new JLabel("Crear un Nuevo Equipo");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -40,7 +35,7 @@ public class EditTeamWindow {
 
         // team name
         JLabel nameLabel = new JLabel("Nombre del equipo:");
-        JTextField nameField = new JTextField(currentTeam.getName());
+        JTextField nameField = new JTextField();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0;
@@ -52,7 +47,7 @@ public class EditTeamWindow {
 
         // city name
         JLabel cityLabel = new JLabel("Nombre de la ciudad:");
-        JTextField cityField = new JTextField(currentTeam.getCity());
+        JTextField cityField = new JTextField();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0;
@@ -64,7 +59,7 @@ public class EditTeamWindow {
 
         // stadium name
         JLabel stadiumLabel = new JLabel("Nombre del estadio:");
-        JTextField stadiumField = new JTextField(currentTeam.getStadium());
+        JTextField stadiumField = new JTextField();
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.weightx = 0;
@@ -75,7 +70,7 @@ public class EditTeamWindow {
         formPanel.add(stadiumField, gbc);
 
         // send button
-        JButton createButton = new JButton("Editar");
+        JButton createButton = new JButton("Crear");
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2; // 2 columns
@@ -98,9 +93,9 @@ public class EditTeamWindow {
             String cityName = cityField.getText();
             String stadiumName = stadiumField.getText();
 
-            boolean response = teamDAO.updateTeam(new Team(teamID, teamName, cityName, stadiumName));
+            boolean response = teamDAO.addTeam(new Team(0, teamName, cityName, stadiumName));
 
-            JOptionPane.showMessageDialog(frame, response ? "Equipo editado de manera correcta" : "Ocurrió un error");
+            JOptionPane.showMessageDialog(frame, response ? "Equipo agregado de manera correcta" : "Ocurrió un error");
 
             frame.dispose();
         });

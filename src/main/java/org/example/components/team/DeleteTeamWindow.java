@@ -1,4 +1,4 @@
-package org.example.components;
+package org.example.components.team;
 
 import org.example.lib.TeamDAO;
 import org.example.models.Team;
@@ -8,16 +8,17 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SelectTeamDetailsWindow {
+public class DeleteTeamWindow {
     private TeamDAO teamDAO = new TeamDAO();
-    public SelectTeamDetailsWindow() throws SQLException, IOException {
-        JFrame frame = new JFrame("Selecciona el equipo");
+
+    public DeleteTeamWindow() throws SQLException, IOException {
+        JFrame frame = new JFrame("Selecciona el equipo a eliminar");
         frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
 
         // combo box title
-        JLabel titleLabel = new JLabel("Selecciona el equipo que quieras ver");
+        JLabel titleLabel = new JLabel("Selecciona el equipo a eliminar");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -33,9 +34,9 @@ public class SelectTeamDetailsWindow {
         gbc.weightx = 1.0;
 
         // team name
-        JLabel nameLabel = new JLabel("Selecciona el equipo");
+        JLabel nameLabel = new JLabel("Selecciona el equipo que deseas eliminar");
         JComboBox<Team> names = new JComboBox<>();
-        for(Team team: teamDAO.getAllTeams()) {
+        for (Team team : teamDAO.getAllTeams()) {
             names.addItem(team);
         }
         gbc.gridx = 0;
@@ -48,7 +49,7 @@ public class SelectTeamDetailsWindow {
         selectPanel.add(names, gbc);
 
         // send button
-        JButton createButton = new JButton("Seleccionar");
+        JButton createButton = new JButton("Eliminar");
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2; // 2 columns
@@ -58,13 +59,10 @@ public class SelectTeamDetailsWindow {
 
         createButton.addActionListener(e -> {
             Team selectedTeam = (Team) names.getSelectedItem();
-            try {
-                assert selectedTeam != null;
-                new TeamDetailsWindow(selectedTeam.getId());
-                frame.dispose();
-            } catch (SQLException | IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            assert selectedTeam != null;
+            boolean response = teamDAO.deleteTeam(selectedTeam.getId());
+            JOptionPane.showMessageDialog(frame, response ? "Equipo eliminado de manera correcta" : "Ocurrió un error");
+            frame.dispose();
         });
 
         // styling components

@@ -1,24 +1,24 @@
-package org.example.components;
+package org.example.components.player;
 
-import org.example.lib.TeamDAO;
-import org.example.models.Team;
+import org.example.lib.PlayerDAO;
+import org.example.models.Player;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class DeleteTeamWindow {
-    private TeamDAO teamDAO = new TeamDAO();
+public class DeletePlayerWindow {
+    private PlayerDAO playerDAO = new PlayerDAO();
 
-    public DeleteTeamWindow() throws SQLException, IOException {
-        JFrame frame = new JFrame("Selecciona el equipo a eliminar");
+    public DeletePlayerWindow() throws SQLException, IOException {
+        JFrame frame = new JFrame("Selecciona el jugador a eliminar");
         frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
 
         // combo box title
-        JLabel titleLabel = new JLabel("Selecciona el equipo a eliminar");
+        JLabel titleLabel = new JLabel("Selecciona el jugador a eliminar");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -34,10 +34,10 @@ public class DeleteTeamWindow {
         gbc.weightx = 1.0;
 
         // team name
-        JLabel nameLabel = new JLabel("Selecciona el equipo que deseas eliminar");
-        JComboBox<Team> names = new JComboBox<>();
-        for (Team team : teamDAO.getAllTeams()) {
-            names.addItem(team);
+        JLabel nameLabel = new JLabel("Selecciona el jugador que deseas eliminar");
+        JComboBox<Player> names = new JComboBox<>();
+        for (Player player : playerDAO.getAllPlayers()) {
+            names.addItem(player);
         }
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -58,10 +58,10 @@ public class DeleteTeamWindow {
         selectPanel.add(createButton, gbc);
 
         createButton.addActionListener(e -> {
-            Team selectedTeam = (Team) names.getSelectedItem();
+            Player selectedTeam = (Player) names.getSelectedItem();
             assert selectedTeam != null;
-            boolean response = teamDAO.deleteTeam(selectedTeam.getId());
-            JOptionPane.showMessageDialog(frame, response ? "Equipo eliminado de manera correcta" : "Ocurrió un error");
+            boolean response = playerDAO.deletePlayer(selectedTeam.getId());
+            JOptionPane.showMessageDialog(frame, response ? "Jugador eliminado de manera correcta" : "Ocurrió un error");
             frame.dispose();
         });
 

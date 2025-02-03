@@ -1,24 +1,24 @@
-package org.example.components;
+package org.example.components.player;
 
-import org.example.lib.TeamDAO;
-import org.example.models.Team;
+import org.example.lib.PlayerDAO;
+import org.example.models.Player;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SelectTeamEditWindow {
-    private TeamDAO teamDAO = new TeamDAO();
+public class SelectPlayerEditWindow {
+    private PlayerDAO playerDAO = new PlayerDAO();
 
-    public SelectTeamEditWindow() throws SQLException, IOException {
-        JFrame frame = new JFrame("Selecciona el equipo a editar");
+    public SelectPlayerEditWindow() throws SQLException, IOException {
+        JFrame frame = new JFrame("Selecciona el jugador a editar");
         frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
 
         // combo box title
-        JLabel titleLabel = new JLabel("Selecciona el equipo a editar");
+        JLabel titleLabel = new JLabel("Selecciona el jugador a editar");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -35,9 +35,9 @@ public class SelectTeamEditWindow {
 
         // team name
         JLabel nameLabel = new JLabel("Selecciona el equipo");
-        JComboBox<Team> names = new JComboBox<>();
-        for(Team team: teamDAO.getAllTeams()) {
-            names.addItem(team);
+        JComboBox<Player> names = new JComboBox<>();
+        for(Player player: playerDAO.getAllPlayers()) {
+            names.addItem(player);
         }
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -58,10 +58,10 @@ public class SelectTeamEditWindow {
         selectPanel.add(createButton, gbc);
 
         createButton.addActionListener(e -> {
-            Team selectedTeam = (Team) names.getSelectedItem();
+            Player selectedTeam = (Player) names.getSelectedItem();
             try {
                 assert selectedTeam != null;
-                new EditTeamWindow(selectedTeam.getId());
+                new EditPlayerWindow(selectedTeam.getId());
                 frame.dispose();
             } catch (SQLException | IOException ex) {
                 throw new RuntimeException(ex);

@@ -1,4 +1,4 @@
-package org.example.components;
+package org.example.components.team;
 
 import org.example.models.Team;
 import org.example.models.Player;

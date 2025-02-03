@@ -1,4 +1,4 @@
-package org.example.components;
+package org.example.components.player;
 
 import org.example.lib.PlayerDAO;
 import org.example.models.Player;
@@ -8,17 +8,17 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class DeletePlayerWindow {
+public class SelectPlayerDetailsWindow {
     private PlayerDAO playerDAO = new PlayerDAO();
 
-    public DeletePlayerWindow() throws SQLException, IOException {
-        JFrame frame = new JFrame("Selecciona el jugador a eliminar");
+    public SelectPlayerDetailsWindow() throws SQLException, IOException {
+        JFrame frame = new JFrame("Selecciona el jugador");
         frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
 
         // combo box title
-        JLabel titleLabel = new JLabel("Selecciona el jugador a eliminar");
+        JLabel titleLabel = new JLabel("Selecciona el jugador que quieras ver");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -34,10 +34,10 @@ public class DeletePlayerWindow {
         gbc.weightx = 1.0;
 
         // team name
-        JLabel nameLabel = new JLabel("Selecciona el jugador que deseas eliminar");
+        JLabel nameLabel = new JLabel("Selecciona el jugador");
         JComboBox<Player> names = new JComboBox<>();
-        for (Player player : playerDAO.getAllPlayers()) {
-            names.addItem(player);
+        for(Player team: playerDAO.getAllPlayers()) {
+            names.addItem(team);
         }
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -49,7 +49,7 @@ public class DeletePlayerWindow {
         selectPanel.add(names, gbc);
 
         // send button
-        JButton createButton = new JButton("Eliminar");
+        JButton createButton = new JButton("Seleccionar");
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2; // 2 columns
@@ -59,10 +59,13 @@ public class DeletePlayerWindow {
 
         createButton.addActionListener(e -> {
             Player selectedTeam = (Player) names.getSelectedItem();
-            assert selectedTeam != null;
-            boolean response = playerDAO.deletePlayer(selectedTeam.getId());
-            JOptionPane.showMessageDialog(frame, response ? "Jugador eliminado de manera correcta" : "Ocurrió un error");
-            frame.dispose();
+            try {
+                assert selectedTeam != null;
+                new PlayerDetailsWindow(selectedTeam.getId());
+                frame.dispose();
+            } catch (SQLException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         // styling components

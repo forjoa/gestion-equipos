@@ -1,4 +1,4 @@
-package org.example.components;
+package org.example.components.player;
 
 import org.example.lib.PlayerDAO;
 import org.example.lib.TeamDAO;
