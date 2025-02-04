@@ -16,15 +16,14 @@ public class SplashScreen extends JDialog {
             throw new RuntimeException(e);
         }
 
-        setSize(400, 250);
+        setSize(400, 400);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         setUndecorated(true);
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        JLabel logoLabel = new JLabel("Gestión Equipos", JLabel.CENTER);
-        logoLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        logoLabel.setForeground(Color.WHITE);
+        ImageIcon gifIcon = new ImageIcon(getClass().getResource("/images/b.gif"));
+        JLabel gifLabel = new JLabel(gifIcon, JLabel.CENTER);
 
         JLabel messageLabel = new JLabel("Cargando recursos, por favor espere...", JLabel.CENTER);
         messageLabel.setFont(new Font("Arial", Font.BOLD, 14));
@@ -36,7 +35,7 @@ public class SplashScreen extends JDialog {
         progressBar.setFont(new Font("Arial", Font.BOLD, 14));
         progressBar.setForeground(Color.decode("#016BFF"));
 
-        mainPanel.add(logoLabel, BorderLayout.CENTER);
+        mainPanel.add(gifLabel, BorderLayout.CENTER);
         mainPanel.add(messageLabel, BorderLayout.SOUTH);
 
         add(mainPanel, BorderLayout.CENTER);
