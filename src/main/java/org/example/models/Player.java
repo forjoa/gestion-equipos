@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Class to save a player information with the id, name, positions and team id
+ * @author Joaquin Trujillo
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

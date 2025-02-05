@@ -8,6 +8,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Window with the form to edit the previously selected equipment, each input comes with the values ​​of the equipment
+ * @author Joaquin Trujillo
+ */
 public class EditTeamWindow {
     private TeamDAO teamDAO = new TeamDAO();
     private Integer teamID;

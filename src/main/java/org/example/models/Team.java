@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Class to save all the team information like the id, name, city and stadium
+ * @author Joaquin Trujillo
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

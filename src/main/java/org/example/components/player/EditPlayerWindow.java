@@ -10,6 +10,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Form to edit a user collected by their ID
+ * @author Joaquin Trujillo
+ */
 public class EditPlayerWindow {
     public PlayerDAO playerDAO = new PlayerDAO();
     public TeamDAO teamDAO = new TeamDAO();

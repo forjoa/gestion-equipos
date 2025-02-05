@@ -8,6 +8,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Window to select the equipment we want to edit, shows a list of all the equipment available to select
+ * @author Joaquin Trujillo
+ */
 public class SelectTeamEditWindow {
     private TeamDAO teamDAO = new TeamDAO();
 

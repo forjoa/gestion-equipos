@@ -1,5 +1,10 @@
 package org.example.lib;
 
+/**
+ * Queries storage, here we have all the teams and players queries to get information, insert new data,
+ * update data or delete it
+ * @author Joaquin Trujillo
+ */
 public class Constants {
     // teams queries
     public static final String INSERT_TEAM = "INSERT INTO equipos (nombre, ciudad, estadio) VALUES (?, ?, ?)";

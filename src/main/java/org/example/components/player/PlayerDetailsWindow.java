@@ -10,6 +10,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Window to display the details of the player previously selected by his ID
+ * @author Joaquin Trujillo
+ */
 public class PlayerDetailsWindow {
     private PlayerDAO playerDAO = new PlayerDAO();
     private TeamDAO teamDAO = new TeamDAO();
@@ -58,6 +62,12 @@ public class PlayerDetailsWindow {
         frame.setVisible(true);
     }
 
+    /**
+     * Function to create a JLabel with its respective value
+     * * @param panel frame where the JLabel will go
+     * * @param labelText value for the text label
+     * * @param valueText value for the text (player description)
+     */
     private void addLabelAndValue(JPanel panel, String labelText, String valueText) {
         JLabel label = new JLabel(labelText);
         label.setFont(new Font("Arial", Font.BOLD, 14));

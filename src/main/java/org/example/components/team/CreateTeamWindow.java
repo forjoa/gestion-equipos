@@ -8,6 +8,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Window with the form to add a new team, asking for each of its attributes except the list of players
+ * @author Joaquin Trujillo
+ */
 public class CreateTeamWindow {
     private TeamDAO teamDAO = new TeamDAO();
 

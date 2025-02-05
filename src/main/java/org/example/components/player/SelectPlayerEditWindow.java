@@ -8,6 +8,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Window to select the player that will later be edited
+ * @author Joaquin Trujillo
+ */
 public class SelectPlayerEditWindow {
     private PlayerDAO playerDAO = new PlayerDAO();
 

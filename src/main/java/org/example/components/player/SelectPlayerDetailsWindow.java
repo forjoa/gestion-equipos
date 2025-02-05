@@ -8,6 +8,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Window to select a player and then display his details
+ * @author Joaquin Trujillo
+ */
 public class SelectPlayerDetailsWindow {
     private PlayerDAO playerDAO = new PlayerDAO();
 

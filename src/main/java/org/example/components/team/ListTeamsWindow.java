@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Window to list all teams and their respective information except their list of players
+ * @author Joaquin Trujillo
+ */
 public class ListTeamsWindow {
     private TeamDAO teamDAO = new TeamDAO();
 

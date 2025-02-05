@@ -8,6 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to access database data
+ * @author Joaquin Trujillo
+ */
 public class PlayerDAO {
     private final Connection database;
 
@@ -15,7 +19,11 @@ public class PlayerDAO {
         database = Database.getConnection();
     }
 
-    // insert new player
+    /**
+     * Function to insert new player
+     * @param player all the player information
+     * @return boolean to show the correct insertion in the database
+     */
     public boolean addPlayer(Player player) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.INSERT_PLAYER)) {
             stmt.setString(1, player.getName());
@@ -27,7 +35,10 @@ public class PlayerDAO {
         }
     }
 
-    // get all players
+    /**
+     * Function to get all players list
+     * @return list of Player
+     */
     public List<Player> getAllPlayers() {
         List<Player> players = new ArrayList<>();
         try (Statement stmt = database.createStatement();
@@ -49,7 +60,11 @@ public class PlayerDAO {
         return players;
     }
 
-    // get a player by id
+    /**
+     * Function to get a single player based on the ID
+     * @param id player identification number
+     * @return Player found, null in case of not found
+     */
     public Player getPlayerById(Integer id) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.PLAYER_BY_ID)) {
             stmt.setInt(1, id);
@@ -70,7 +85,11 @@ public class PlayerDAO {
         return null;
     }
 
-    // update player information
+    /**
+     * Function to update a player information
+     * @param player Player object to edit, including the ID
+     * @return boolean to know the correct update in the database
+     */
     public boolean updatePlayer(Player player) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.UPDATE_PLAYER)) {
             stmt.setString(1, player.getName());
@@ -83,7 +102,11 @@ public class PlayerDAO {
         }
     }
 
-    // delete by id
+    /**
+     * Function to delete a player based on the ID
+     * @param id player identification number
+     * @return boolean to know the correct deletion in the database
+     */
     public boolean deletePlayer(Integer id) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.DELETE_PLAYER)) {
             stmt.setInt(1, id);

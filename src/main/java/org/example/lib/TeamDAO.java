@@ -12,6 +12,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to access all the database information
+ * @author Joaquin Trujillo
+ */
 public class TeamDAO {
     private final Connection database;
 
@@ -19,7 +23,11 @@ public class TeamDAO {
         database = Database.getConnection();
     }
 
-    // insert new team
+    /**
+     * Function to create a new team
+     * @param team all the team information recollected in form
+     * @return boolean to know if the insertion went well
+     */
     public boolean addTeam(Team team) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.INSERT_TEAM)) {
             stmt.setString(1, team.getName());
@@ -31,7 +39,10 @@ public class TeamDAO {
         }
     }
 
-    // get all teams
+    /**
+     * Function to get all the teams
+     * @return a list of Team
+     */
     public List<Team> getAllTeams() {
         List<Team> teams = new ArrayList<>();
         try (Statement stmt = database.createStatement();
@@ -53,7 +64,11 @@ public class TeamDAO {
         return teams;
     }
 
-    // get a team by id
+    /**
+     * Function to get a single team found by ID
+     * @param id identification number from the team
+     * @return the Team information or null in case not found
+     */
     public Team getTeamById(Integer id) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.TEAM_BY_ID)) {
             stmt.setInt(1, id);
@@ -74,7 +89,11 @@ public class TeamDAO {
         return null;
     }
 
-    // update team information
+    /**
+     * Function to update the team information
+     * @param team all the team information updated
+     * @return boolean to know if the update went well
+     */
     public boolean updateTeam(Team team) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.UPDATE_TEAM)) {
             stmt.setString(1, team.getName());
@@ -87,7 +106,11 @@ public class TeamDAO {
         }
     }
 
-    // delete by id
+    /**
+     * Delete a team found by ID
+     * @param id team identification number
+     * @return boolean to know if the deletion went well
+     */
     public boolean deleteTeam(Integer id) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.DELETE_TEAM)) {
             stmt.setInt(1, id);
@@ -97,7 +120,11 @@ public class TeamDAO {
         }
     }
 
-    // get team info and players
+    /**
+     * Function to get not just the team information but the players list
+     * @param id team identification number
+     * @return new Team Players object with team information and players list
+     */
     public TeamPlayers getAllTeamPlayersById(Integer id) {
         try (PreparedStatement stmt = database.prepareStatement(Constants.TEAM_PLAYERS_BY_ID)) {
             stmt.setInt(1, id);
@@ -136,6 +163,10 @@ public class TeamDAO {
         }
     }
 
+    /**
+     * Function to get not just the team information but the players list from ALL the teams
+     * @return a list from the Team Players object
+     */
     public List<TeamPlayers> getAllTeamPlayers() {
         List<TeamPlayers> teamsList = new ArrayList<>();
 

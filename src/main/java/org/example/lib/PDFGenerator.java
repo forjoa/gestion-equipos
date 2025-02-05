@@ -10,8 +10,15 @@ import org.example.models.TeamPlayers;
 
 import java.io.FileNotFoundException;
 import java.util.List;
-
+/**
+ * Class that works as a pdf generator
+ * @author Joaquin Trujillo
+ */
 public class PDFGenerator {
+    /**
+     * Method to build a PDF based on all the teams detailed information
+     * @param teams list of all the team information and each player list
+     */
     public static void generateTeamsReport(List<TeamPlayers> teams) {
         String destination = "teams_report.pdf";
 

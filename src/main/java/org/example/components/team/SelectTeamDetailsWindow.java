@@ -8,6 +8,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Preview window to select the equipment to display all its information, shows the list of all available equipment to select
+ * @author Joaquin Trujillo
+ */
 public class SelectTeamDetailsWindow {
     private TeamDAO teamDAO = new TeamDAO();
     public SelectTeamDetailsWindow() throws SQLException, IOException {

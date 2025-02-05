@@ -5,6 +5,10 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class that stores the application's Splash Screen
+ * @author Joaquin Trujillo
+ */
 public class SplashScreen extends JDialog {
     private JProgressBar progressBar;
 
@@ -42,6 +46,10 @@ public class SplashScreen extends JDialog {
         add(progressBar, BorderLayout.SOUTH);
     }
 
+    /**
+     * Give a new value to the progress bar
+     * @param progress new value to progress bar
+     */
     public void updateProgress(int progress) {
         progressBar.setValue(progress);
     }

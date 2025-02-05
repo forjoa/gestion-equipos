@@ -18,6 +18,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Class in which the individual application is started
+ * @author Joaquin Trujillo
+ */
 public class App {
     public App() {
         try {

@@ -4,7 +4,16 @@ import org.example.models.Team;
 
 import java.util.List;
 
+/**
+ * Class that work like a helper to convert the objects in a multidimensional array to set in a table
+ * @author Joaquin Trujillo
+ */
 public class TeamTableConverter {
+    /**
+     * Function to convert the list to array
+     * @param teams the list of the object to convert
+     * @return and multidimensional object array
+     */
     public static Object[][] convertListToArray(List<Team> teams) {
         Object[][] data = new Object[teams.size()][4];
 

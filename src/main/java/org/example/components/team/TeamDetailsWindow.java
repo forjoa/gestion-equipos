@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Window with all the information about the teams including their list of players
+ * @author Joaquin Trujillo
+ */
 public class TeamDetailsWindow {
     private TeamDAO teamDAO = new TeamDAO();
 
@@ -73,6 +77,11 @@ public class TeamDetailsWindow {
         frame.setVisible(true);
     }
 
+    /**
+     * Generates the scrolling panel from a list of players
+     * @param playersList list of players to render
+     * @return returns the JScrollPane object with the list embedded
+     */
     private static JScrollPane getJScrollPane(List<Player> playersList) {
         DefaultListModel<String> playersListModel = new DefaultListModel<>();
         for (Player player : playersList) {
@@ -86,6 +95,12 @@ public class TeamDetailsWindow {
         return new JScrollPane(playersListComponent);
     }
 
+    /**
+     * Method to fill in the label and value of the detailed information of the equipment
+     * @param panel frame in which we will put
+     * @param labelText description of the value below
+     * @param valueText written value
+     */
     private void addLabelAndValue(JPanel panel, String labelText, String valueText) {
         JLabel label = new JLabel(labelText);
         label.setFont(new Font("Arial", Font.BOLD, 14));

@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Useful class to get the team information with the Team class, and including the player list
+ * @author Joaquin Trujillo
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

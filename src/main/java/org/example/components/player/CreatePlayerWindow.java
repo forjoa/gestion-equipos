@@ -10,6 +10,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Form to create a new player
+ * @author Joaquin Trujillo
+ */
 public class CreatePlayerWindow {
     private PlayerDAO playerDAO = new PlayerDAO();
     private TeamDAO teamDAO = new TeamDAO();

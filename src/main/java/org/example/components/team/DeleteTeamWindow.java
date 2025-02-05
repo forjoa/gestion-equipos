@@ -8,6 +8,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Window to select the equipment to delete
+ * @author Joaquin Trujillo
+ */
 public class DeleteTeamWindow {
     private TeamDAO teamDAO = new TeamDAO();
 

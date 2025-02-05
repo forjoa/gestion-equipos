@@ -10,7 +10,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Class that works as an excel generator
+ * @author Joaquin Trujillo
+ */
 public class ExcelGenerator {
+    /**
+     * Method to build an Excel book based in the list of teams
+     * @param teams all the teams information
+     * @param teamDAO class to ask for each team players
+     * @throws IOException exception
+     */
     public static void generateTeamsExcel(List<Team> teams, TeamDAO teamDAO) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Equipos y Jugadores");
